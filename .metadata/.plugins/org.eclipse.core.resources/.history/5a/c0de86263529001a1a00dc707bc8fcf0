@@ -1,0 +1,16 @@
+package com.bridgelabz.crudprograms.HibernatePrograms;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        Student student1=new Student();
+        student1.setSid(101);
+        student1.setSname("Sagar");
+        student1.setMarks(86);
+    }
+}

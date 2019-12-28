@@ -1,0 +1,68 @@
+package com.bridgelabz.crudprograms.HibernatePrograms;
+import java.util.Scanner;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class UpdateStudent
+{
+	Configuration configuration = new Configuration().configure().addAnnotatedClass(Student.class);
+	SessionFactory sessionFactory = configuration.buildSessionFactory();
+	
+	static Session session = sessionFactory.openSession();
+
+	Transaction transaction=session.beginTransaction();
+
+	public static void main(String[] args) {
+
+		
+public static int checkid(int id) {
+
+	Query q = session.createQuery(" from Student where Id =" + id + " ");
+	List<Student> list = q.list();
+	for (Student s : list) {
+		if (s.getId() == id)
+
+		{
+
+			return 1;
+		}
+		
+		Query q = session.createQuery(" from Student ");
+
+		Student s = new Student();
+		Scanner scan=new Scanner(System.in);
+		System.out.println("Enter  Id");
+		 int id = scan.nextInt();
+		 int value = checkid(id);
+		 
+		 if (value > 0) {
+		
+		Student s = new Student();
+       
+		//s.setId(id);
+		System.out.println("Enter the the Student Id");
+		String sid=scan.next();
+		System.out.println("Enter the Student Name");
+		String sname=scan.next();
+		
+		System.out.println("Enter the Marks");
+		int marks=scan.nextInt();
+	
+		s.setSid(sid);
+		s.setAge(age);
+		s.setAddress(address);
+		s.setPhone(phone);
+		s.setCourse(course);
+		session.update(s);
+		t.commit();
+		session.close();
+		System.out.println("Record Updated");
+			
+		 }
+
+
+	}
+}

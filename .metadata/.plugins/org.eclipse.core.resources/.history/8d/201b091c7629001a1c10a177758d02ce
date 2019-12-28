@@ -1,0 +1,38 @@
+package com.bridgelabz.crudprograms.HibernatePrograms;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
+public class ReadStudent {
+
+ /**
+  * @param args
+  */
+ public static void main(String[] args) 
+ {
+  //Create session factory object
+	 Configuration configuration = new Configuration().configure().addAnnotatedClass(Student.class);
+		
+	 //	ServiceRegistry servicereg=new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+
+		// 3 again we cannot create object of SessionFactory because SessionFactory
+		// so create Configuration object
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+ 
+  //getting session object from session factory
+  Session session = sessionFactory.openSession();
+  //getting transaction object from session object
+  session.beginTransaction();
+  Query query = session.createQuery("from Student");
+  List students = query.list();
+  for(Student student : students)
+  {
+System.out.println("Student ID: "+student.getSid()+", Student Name: "+student.getSname()+", Marks: "+student.getMarks());
+  }
+  session.getTransaction().commit();
+  sessionFactory.close();
+ }
+}

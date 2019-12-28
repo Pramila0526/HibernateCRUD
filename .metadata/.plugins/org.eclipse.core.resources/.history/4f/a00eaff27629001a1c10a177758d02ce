@@ -1,0 +1,50 @@
+package com.bridgelabz.crudprograms.HibernatePrograms;
+
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class ReadStudent {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Configuration configuration = new Configuration().configure().addAnnotatedClass(Student.class);
+		
+		 //	ServiceRegistry servicereg=new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+
+			// 3 again we cannot create object of SessionFactory because SessionFactory
+			// so create Configuration object
+			SessionFactory sessionFactory = configuration.buildSessionFactory();
+			
+			// 2 we cannot create object of session because session is an Interface
+			// so create SessionFactory object
+			Session session = sessionFactory.openSession();
+			
+			// Whenevver you want to save any data into the database you make changes
+			// and whenever you make changes you have to follow ACID Properties
+			// So all these changes should be a part of transactions
+			Transaction transaction=session.beginTransaction();
+			Query q = session.createQuery(" from Student ");
+
+			System.out.println("----------------Student details --------------------\n");
+
+			List<Student> list = q.list();
+			for (Student s : list) {
+				System.out.println("Id       : " + s.getSid());
+				System.out.println("Name     : " + s.getSname());
+				System.out.println("Address  : " + s.getMarks());
+			
+				System.out.println("------------------------------------");
+			}
+			
+			
+			transaction.commit();
+		
+		sessionFactory.close();
+	}
+}

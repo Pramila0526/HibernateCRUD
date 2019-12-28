@@ -1,0 +1,27 @@
+package com.bridgelabz.crudprograms.HibernatePrograms;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        Student student1=new Student();
+        student1.setSid(101);
+        student1.setSname("Sagar");
+        student1.setMarks(86);
+        
+        Configuration configuration=new Configuration();
+        SessionFactory  sf =configuration.buildSessionFactory(); // 3 again we cannot create object of SessionFactory because SessionFactory 
+		 					// so create Configuration object
+        Session session  // 2 we cannot create object of session because session is an Interface 
+        				// so create SessionFactory object
+        save(student1);  // 1
+    }
+}
